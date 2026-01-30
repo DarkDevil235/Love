@@ -8,46 +8,41 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
-/* 🌙 BODY – FIXED CENTER */
+/* 🌙 BACKGROUND */
 body{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
+  min-height:100svh;
   background:
     linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.85)),
     url("https://i.ibb.co/gbxCmRJQ/bea1f1ad-bb8b-4e85-81c0-c08b87620440.jpg");
   background-size:cover;
   background-position:center;
-
-  color:#fff;
+  background-repeat:no-repeat;
   font-family:'Poppins',sans-serif;
-  overflow:hidden;
+  color:#fff;
 }
 
-/* 📄 PAGES – PERFECT CENTER */
-.page{
-  position:absolute;
-  inset:0;
-
-  display:none;
+/* 🧱 CENTER WRAPPER */
+.app{
+  min-height:100svh;
+  display:flex;
   align-items:center;
   justify-content:center;
-  flex-direction:column;
-
   padding:20px;
-  animation:fade 1s ease;
+}
+
+/* 📄 PAGES */
+.page{
+  display:none;
+  width:100%;
+  align-items:center;
+  justify-content:center;
 }
 
 .page.active{
   display:flex;
+  animation:fade .9s ease;
 }
 
 @keyframes fade{
@@ -55,30 +50,28 @@ body{
   to{opacity:1;transform:translateY(0)}
 }
 
-/* 🪟 GLASS CARD */
+/* 🪟 CARD */
 .card{
   width:100%;
   max-width:440px;
   padding:35px;
   border-radius:22px;
-
   background:rgba(255,255,255,0.09);
   backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
-
   box-shadow:0 15px 45px rgba(0,0,0,.6);
   text-align:center;
   position:relative;
 }
 
-/* 🌹 FLOWERS */
+/* 🌹 DECOR */
 .card::before,
 .card::after{
   content:"";
   position:absolute;
   width:80px;
   height:80px;
-  background:url("https://pngimg.com/uploads/rose/rose_PNG669.png") no-repeat center/contain;
+  background:url("https://i.ibb.co/0zPgMth/bea1f1ad-bb8b-4e85-81c0-c08b87620440.jpg") no-repeat center/contain;
   opacity:.6;
 }
 .card::before{top:-30px;left:-30px}
@@ -115,27 +108,23 @@ input{
 }
 
 /* 🔘 BUTTONS */
-.btn-gold{
-  margin-top:22px;
-  padding:13px 36px;
-  border:none;
-  border-radius:30px;
-  background:linear-gradient(135deg,#f6d365,#fda085);
-  color:#000;
-  font-weight:600;
-  cursor:pointer;
-  box-shadow:0 8px 25px rgba(253,160,133,.5);
-}
-
+.btn-gold,
 .btn-blue{
   margin-top:22px;
   padding:13px 36px;
   border:none;
   border-radius:30px;
-  background:linear-gradient(135deg,#89f7fe,#66a6ff);
-  color:#000;
   font-weight:600;
   cursor:pointer;
+}
+
+.btn-gold{
+  background:linear-gradient(135deg,#f6d365,#fda085);
+  box-shadow:0 8px 25px rgba(253,160,133,.5);
+}
+
+.btn-blue{
+  background:linear-gradient(135deg,#89f7fe,#66a6ff);
   box-shadow:0 8px 25px rgba(102,166,255,.5);
 }
 
@@ -151,10 +140,12 @@ input{
 </head>
 <body>
 
-<!-- 🎶 BACKGROUND MUSIC -->
-<audio autoplay loop>
-  <source src="Music5.mp3">
+<!-- 🎶 MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="/Music5.mp3">
 </audio>
+
+<div class="app">
 
 <!-- START PAGE -->
 <div class="page active">
@@ -163,7 +154,7 @@ input{
     <div class="subtitle">
       A few caring questions, asked with warmth and affection
     </div>
-    <button class="btn-gold" onclick="nextPage()">Begin</button>
+    <button class="btn-gold" onclick="startExperience()">Begin</button>
   </div>
 </div>
 
@@ -206,7 +197,7 @@ input{
   </div>
 </div>
 
-<!-- FINAL PAGE -->
+<!-- FINAL PAGE (RESTORED TEXT 💙) -->
 <div class="page final">
   <div class="card">
     <div class="title">Take Care</div>
@@ -224,13 +215,21 @@ input{
   </div>
 </div>
 
+</div>
+
 <script>
-/* 🔐 TELEGRAM SETUP */
+/* 🔐 TELEGRAM CONFIG */
 const BOT_TOKEN = "8285704873:AAGhvwM31d1rYZ_YUte8GYFdkiGFcge-hsE";
 const CHAT_ID = "7078721018";
 
 const pages = document.querySelectorAll(".page");
+const music = document.getElementById("bgMusic");
 let current = 0;
+
+function startExperience(){
+  music.play().catch(()=>{});
+  nextPage();
+}
 
 function nextPage(){
   pages[current].classList.remove("active");
@@ -239,15 +238,15 @@ function nextPage(){
 }
 
 function send(n){
-  const val = document.getElementById("a"+n).value;
-  if(!val.trim()) return;
+  const val = document.getElementById("a"+n).value.trim();
+  if(!val) return;
 
   fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
     method:"POST",
-    headers:{'Content-Type':'application/json'},
+    headers:{ "Content-Type":"application/json" },
     body:JSON.stringify({
-      chat_id:CHAT_ID,
-      text:`Love Website Response\nQuestion ${n}:\n${val}`
+      chat_id: CHAT_ID,
+      text: `Love Website Response\nQuestion ${n}:\n${val}`
     })
   });
 
