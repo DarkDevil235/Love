@@ -8,52 +8,70 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
+/* 🌙 BODY – FIXED CENTER */
 body{
-  height:100vh;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
   background:
     linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.85)),
     url("https://i.ibb.co/gbxCmRJQ/bea1f1ad-bb8b-4e85-81c0-c08b87620440.jpg");
   background-size:cover;
   background-position:center;
+
   color:#fff;
   font-family:'Poppins',sans-serif;
   overflow:hidden;
 }
 
-/* Pages */
+/* 📄 PAGES – PERFECT CENTER */
 .page{
+  position:absolute;
+  inset:0;
+
   display:none;
-  height:100vh;
   align-items:center;
   justify-content:center;
   flex-direction:column;
+
   padding:20px;
   animation:fade 1s ease;
 }
-.page.active{display:flex}
+
+.page.active{
+  display:flex;
+}
 
 @keyframes fade{
   from{opacity:0;transform:translateY(30px)}
-  to{opacity:1}
+  to{opacity:1;transform:translateY(0)}
 }
 
-/* Glass Card */
+/* 🪟 GLASS CARD */
 .card{
   width:100%;
   max-width:440px;
   padding:35px;
   border-radius:22px;
+
   background:rgba(255,255,255,0.09);
   backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
+
   box-shadow:0 15px 45px rgba(0,0,0,.6);
   text-align:center;
   position:relative;
 }
 
-/* Flower PNGs */
+/* 🌹 FLOWERS */
 .card::before,
 .card::after{
   content:"";
@@ -66,7 +84,7 @@ body{
 .card::before{top:-30px;left:-30px}
 .card::after{bottom:-30px;right:-30px}
 
-/* Text */
+/* ✨ TEXT */
 .title{
   font-family:'Playfair Display',serif;
   font-size:26px;
@@ -84,7 +102,7 @@ body{
   line-height:1.4;
 }
 
-/* Input */
+/* ✍️ INPUT */
 input{
   width:100%;
   padding:14px;
@@ -96,7 +114,7 @@ input{
   font-size:15px;
 }
 
-/* Buttons */
+/* 🔘 BUTTONS */
 .btn-gold{
   margin-top:22px;
   padding:13px 36px;
@@ -121,7 +139,7 @@ input{
   box-shadow:0 8px 25px rgba(102,166,255,.5);
 }
 
-/* Final Page */
+/* 🌸 FINAL PAGE */
 .final small{
   display:block;
   margin-top:18px;
@@ -133,7 +151,7 @@ input{
 </head>
 <body>
 
-<!-- 🎶 Soft Music -->
+<!-- 🎶 BACKGROUND MUSIC -->
 <audio autoplay loop>
   <source src="/Music5.mp3">
 </audio>
@@ -152,9 +170,7 @@ input{
 <!-- QUESTION 1 -->
 <div class="page">
   <div class="card">
-    <div class="question">
-      How are you feeling right now..?
-    </div>
+    <div class="question">How are you feeling right now..?</div>
     <input id="a1" placeholder="Share your feelings...">
     <button class="btn-blue" onclick="send(1)">Continue</button>
   </div>
@@ -163,9 +179,7 @@ input{
 <!-- QUESTION 2 -->
 <div class="page">
   <div class="card">
-    <div class="question">
-      Have you eaten something today..?
-    </div>
+    <div class="question">Have you eaten something today..?</div>
     <input id="a2" placeholder="I just want to be sure...">
     <button class="btn-gold" onclick="send(2)">Continue</button>
   </div>
@@ -186,9 +200,7 @@ input{
 <!-- QUESTION 4 -->
 <div class="page">
   <div class="card">
-    <div class="question">
-      Did you find a quiet moment to smile today..?
-    </div>
+    <div class="question">Did you find a quiet moment to smile today..?</div>
     <input id="a4" placeholder="Even a small one matters...">
     <button class="btn-gold" onclick="send(4)">Continue</button>
   </div>
