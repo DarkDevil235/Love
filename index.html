@@ -10,23 +10,22 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
-/* 🌸 BACKGROUND */
+/* 🌸 BACKGROUND (ANDROID SAFE) */
 html, body{
-  width:100%;
-  height:100%;
-  font-family:'Poppins',sans-serif;
-  color:#fff;
+  min-height:100%;
   background:
     linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.75)),
     url("https://i.ibb.co/gbxCmRJQ/bea1f1ad-bb8b-4e85-81c0-c08b87620440.jpg");
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
+  font-family:'Poppins',sans-serif;
+  color:#fff;
 }
 
-/* 🧱 APP – REAL FULL SCREEN */
+/* 🧱 APP WRAPPER */
 .app{
-  height: calc(var(--vh, 1vh) * 100);
+  min-height:100svh;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -43,11 +42,11 @@ html, body{
 
 .page.active{
   display:flex;
-  animation:fade .8s ease;
+  animation:fade .9s ease;
 }
 
 @keyframes fade{
-  from{opacity:0;transform:translateY(20px)}
+  from{opacity:0;transform:translateY(25px)}
   to{opacity:1;transform:translateY(0)}
 }
 
@@ -55,17 +54,20 @@ html, body{
 .card{
   width:100%;
   max-width:440px;
-  padding:36px;
-  border-radius:26px;
-  background:rgba(255,255,255,0.12);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  box-shadow:0 22px 55px rgba(0,0,0,.55);
+  padding:35px;
+  border-radius:22px;
+  background:rgba(255,255,255,0.10);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 18px 45px rgba(0,0,0,.55);
   text-align:center;
   position:relative;
+
+  /* 👇 VISUAL CENTER FIX */
+  transform: translateY(40px);
 }
 
-/* 🌹 FLOWER PNG */
+/* 🌹 FLOWER PNG (CHANGE URL HERE) */
 .card::before,
 .card::after{
   content:"";
@@ -82,12 +84,12 @@ html, body{
 .title{
   font-family:'Playfair Display',serif;
   font-size:26px;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 .subtitle{
   font-size:14px;
   opacity:.85;
-  margin-bottom:34px;
+  margin-bottom:30px;
 }
 .question{
   font-family:'Playfair Display',serif;
@@ -112,21 +114,21 @@ input{
 .btn-gold,
 .btn-blue{
   margin-top:22px;
-  padding:13px 38px;
+  padding:13px 36px;
   border:none;
-  border-radius:32px;
+  border-radius:30px;
   font-weight:600;
   cursor:pointer;
 }
 
 .btn-gold{
   background:linear-gradient(135deg,#f6d365,#fda085);
-  box-shadow:0 10px 28px rgba(253,160,133,.45);
+  box-shadow:0 8px 25px rgba(253,160,133,.45);
 }
 
 .btn-blue{
   background:linear-gradient(135deg,#89f7fe,#66a6ff);
-  box-shadow:0 10px 28px rgba(102,166,255,.45);
+  box-shadow:0 8px 25px rgba(102,166,255,.45);
 }
 
 /* 🌸 FINAL TEXT */
@@ -159,7 +161,7 @@ input{
   </div>
 </div>
 
-<!-- QUESTION 1 -->
+<!-- Q1 -->
 <div class="page">
   <div class="card">
     <div class="question">How are you feeling right now..?</div>
@@ -168,7 +170,7 @@ input{
   </div>
 </div>
 
-<!-- QUESTION 2 -->
+<!-- Q2 -->
 <div class="page">
   <div class="card">
     <div class="question">Have you eaten something today..?</div>
@@ -177,7 +179,7 @@ input{
   </div>
 </div>
 
-<!-- QUESTION 3 -->
+<!-- Q3 -->
 <div class="page">
   <div class="card">
     <div class="question">
@@ -189,7 +191,7 @@ input{
   </div>
 </div>
 
-<!-- QUESTION 4 -->
+<!-- Q4 -->
 <div class="page">
   <div class="card">
     <div class="question">Did you find a quiet moment to smile today..?</div>
@@ -219,16 +221,6 @@ input{
 </div>
 
 <script>
-/* 📱 FIX ANDROID FULL HEIGHT */
-function setVH(){
-  document.documentElement.style.setProperty(
-    '--vh',
-    window.innerHeight * 0.01 + 'px'
-  );
-}
-setVH();
-window.addEventListener('resize', setVH);
-
 /* 🔐 TELEGRAM */
 const BOT_TOKEN = "8285704873:AAGhvwM31d1rYZ_YUte8GYFdkiGFcge-hsE";
 const CHAT_ID = "7078721018";
